@@ -12,7 +12,7 @@
     echo " Apellidos: $apellidos ";
     echo " Edad: $edad ";
     echo " Altura: $altura metros ";
-    echo " ¿Es estudiante?: " . ($estudiante ? "Sí" : "No");
+    echo " Es estudiante?: " . ($estudiante ? "Sí" : "No");
 ?>
 
 <?php
@@ -24,7 +24,5 @@
     echo "Nombre: $producto ";
     echo " Precio: $precio €";
     echo " stock: $stock ";
-    echo " : $altura metros ";
-    echo " ¿Es estudiante?: " . ($estudiante ? "Sí" : "No");
-
+    echo " Está de oferta?: " . ($oferta ? "Sí" : "No");
 ?>
