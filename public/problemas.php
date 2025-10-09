@@ -304,6 +304,9 @@ foreach ($listaCompra as $categoria => $productos) {
 ?>
 
 <?php
+    /*
+    * Ejercicio 5.4: Calcular el coste total de un carrito de la compra
+    */
     $productos = [
     ["nombre" => "Portátil", "precio" => 50],
     ["nombre" => "Ratón", "precio" => 25],
