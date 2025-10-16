@@ -37,38 +37,70 @@ echo fizzBuzz(26);
 ?>
 
 <?php
-function validarContrasena($pass) {
-    if (strlen($pass) <= 8) {
+//Ejercicio 3: Validar la fortaleza de una contraseña mediante una función que reciba la contraseña y devuelva "DEBIL", "MEDIA" o "FUERTE"
+function validarContraseña($pass) {
+    $longitud = strlen($pass);
+    $tieneMayuscula = false;
+    $tieneNumero = false;
+
+    for ($i = 0; $i < $longitud; $i++) {
+        $caracter = $pass[$i];
+
+        if ($caracter === strtoupper($caracter) && $caracter !== strtolower($caracter)) {
+            $tieneMayuscula = true;
+        }
+
+        if (is_numeric($caracter)) {
+            $tieneNumero = true;
+        }
+    }
+
+    // DEBIL: 8 caracteres o menos y no cumple con mayúscula o número
+    if ($longitud <= 8) {
         return "DEBIL";
     }
-
-    $contieneMayuscula = false;
-    $contieneNumero = false;
-
-   
-    for ($i = 0; $i < strlen($pass); $i++) {
-        
-        $caracter = $pass[$i];
-        
-        
-        if ($caracter === strtoupper($caracter) && !is_numeric($caracter)) {
-            $contieneMayuscula = true;
-        }
-
-     
-        if (is_numeric($caracter)) {
-            $contieneNumero = true;
-        }
+    // MEDIA: más de 8 caracteres, pero falta mayúscula o número
+    elseif (!$tieneMayuscula || !$tieneNumero) {
+        return "MEDIA";
     }
-
-   
-    if ($contieneMayuscula && $contieneNumero) {
+    // FUERTE: más de 8 caracteres, al menos una mayúscula y un número
+    else {
         return "FUERTE";
     }
-
-    
-    return "MEDIA";
 }
 
-echo validarContrasena("hola");
+echo validarContraseña("holamundooo");
+?>
+
+
+<?php
+//Ejercicio 4: Encontrar el valor más grande mediante una función que reciba un array de números
+function encontrarMaximo($array) {
+    
+    $maximo = $array[0];
+
+    foreach ($array as $valor) {
+        if ($valor > $maximo) {
+            $maximo = $valor; 
+        }
+    }
+    return $maximo;
+}
+
+$numeros = [1, 10, 15, 45, 123];
+echo "El número más alto es: " . encontrarMaximo($numeros);
+?>
+
+
+<?php
+//Ejercicio 5: Filtrar un array de usuarios para obtener solo aquellos que son mayores de edad utilizando una función anónima (closure)
+$usuarios = [
+    ['nombre' => 'Ana', 'edad' => 25, 'activo' => true],
+    ['nombre' => 'Juan', 'edad' => 17, 'activo' => true],
+    ['nombre' => 'Pedro', 'edad' => 35, 'activo' => false],
+    ['nombre' => 'Sofía', 'edad' => 22, 'activo' => true]
+];
+$mayores = array_filter($usuarios, fn($u) => $u['edad'] >= 18);
+
+print_r($mayores);
 ?>
