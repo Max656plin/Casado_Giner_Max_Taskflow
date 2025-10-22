@@ -1,27 +1,67 @@
+<!-- http://localhost/TaskFlow/public/ -->
 <?php
-    define("SITE_NAME", "TaskFlow");
-    $pageTitle = SITE_NAME . " - Página de Inicio";
+$tasks= [
+    [
+        'title' => 'Estudiar PHP',
+        'completed' => false,
+        'priority' => 'alta'
+    ],
+    [
+        'title' => 'Aprender a dividir',
+        'completed' => true,
+        'priority' => 'Alta'
+    ],
+    [
+        'title' => 'Entrenar la mente',
+        'completed' => false,
+        'priority' => 'baja'
+    ],
+    [
+        'title' => 'Actualizar repositorio en GitHub',
+        'completed' => true,
+        'priority' => 'alta'
+    ],
+    [
+        'title' => 'Organizar escritorio de trabajo',
+        'completed' => false,
+        'priority' => 'media'
+    ]
+];
 
-    $userName = "Máximo Casado Giner"; // Tipo String
-    $userAge = 21;             // Tipo Integer
-    $isPremiumUser = false;     // Tipo Boolean
-
-    
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title><?php echo $pageTitle; ?></title>
-</head>
-<body>
-    <h1>Bienvenido a <?php echo SITE_NAME; ?></h1>
+<?php
+define('SITE_NAME', 'TaskFlow');
 
-    <main>
-        <h2>Perfil del Usuario</h2>
-        <p><strong>Nombre:</strong> <?php echo $userName; ?></p>
-        <p><strong>Edad:</strong> <?php echo $userAge; ?> años</p>
-        <p><strong>Estado de la cuenta:</strong> Usuario <?php echo $isPremiumUser ? "Premium" : "Estándar"; ?></p>
-    </main>
-</body>
-</html>
+include '../app/views/header.php';
+?>
+
+<h2>Tareas Pendientes</h2>
+<ul>
+    <?php foreach ($tasks as $task): ?>
+        <?php
+            $taskClasses = 'task-item';
+
+            if ($task['completed']) {
+                $taskClasses .= ' completed';
+            }
+            switch ($task['priority']) {
+                case 'alta':
+                    $taskClasses .= ' priority-alta';
+                    break;
+                case 'media':
+                    $taskClasses .= ' priority-media';
+                    break;
+                case 'baja':
+                    $taskClasses .= ' priority-baja';
+                    break;
+            }
+        ?>
+        <li class="<?php echo $taskClasses; ?>">
+            <?php echo $task['title']; ?>
+        </li>
+    <?php endforeach; ?>
+</ul>
+
+<?php
+    include("../app/views/footer.php"); // Incluye el pie de página
+?>
