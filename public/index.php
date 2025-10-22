@@ -1,6 +1,6 @@
 <!-- http://localhost/TaskFlow/public/ -->
 <?php
-$tasks= [
+$tasks = [
     [
         'title' => 'Estudiar PHP',
         'completed' => false,
@@ -9,7 +9,7 @@ $tasks= [
     [
         'title' => 'Aprender a dividir',
         'completed' => true,
-        'priority' => 'Alta'
+        'priority' => 'alta'
     ],
     [
         'title' => 'Entrenar la mente',
@@ -27,10 +27,10 @@ $tasks= [
         'priority' => 'media'
     ]
 ];
-
 ?>
 <?php
 define('SITE_NAME', 'TaskFlow');
+$pageTitle = 'Tareas Pendientes - TaskFlow';
 
 include '../app/views/header.php';
 ?>
@@ -39,11 +39,13 @@ include '../app/views/header.php';
 <ul>
     <?php foreach ($tasks as $task): ?>
         <?php
+        
             $taskClasses = 'task-item';
 
             if ($task['completed']) {
                 $taskClasses .= ' completed';
             }
+
             switch ($task['priority']) {
                 case 'alta':
                     $taskClasses .= ' priority-alta';
@@ -63,5 +65,5 @@ include '../app/views/header.php';
 </ul>
 
 <?php
-    include("../app/views/footer.php"); // Incluye el pie de página
+    include("../app/views/footer.php");
 ?>
