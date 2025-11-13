@@ -1,23 +1,48 @@
 <?php
-    use PHPUnit\Framework\TestCase;
-    require_once 'app/data.php';
-    require_once 'app/controllers/AuthController.php';
+use PHPUnit\Framework\TestCase;
 
-    class AuthTest extends TestCase
+require_once 'C:/xampp/htdocs/TaskFlow/app/data.php';
+require_once 'C:/xampp/htdocs/TaskFlow/app/controllers/AuthController.php';
+class AuthTest extends TestCase
+{
+    public function testLoginConCredencialesValidas()
     {
-        public function testLoginConCredencialesValidas()
-        {
-            global $usuarios_bbdd;
-            $resultado = handleLogin('usuario1@taskflow.com', 'pass123', $usuarios_bbdd);
+        $usuarios_bbdd = [
+            'usuario1@taskflow.com' => [
+                'id' => 1,
+                'nombre' => 'Maxim Masin',
+                'password' => 'pass123'
+            ],
+            'usuario2@taskflow.com' => [
+                'id' => 2,
+                'nombre' => 'Carla Alumna',
+                'password' => 'admin'
+            ]
+        ];
 
-            $this->assertTrue($resultado);
-        }
-        public function testLoginConCredencialesInvalidas()
-        {
-            global $usuarios_bbdd;
-            $resultado = handleLogin('usuario1@taskflow.com', 'pass_erroneo', $usuarios_bbdd);
+        // ACTUAR: Llamar a la función con datos correctos
+        $resultado = handleLogin('usuario1@taskflow.com', 'pass123', $usuarios_bbdd);
 
-            $this->assertFalse($resultado);
-        }
+        // ASERCIÓN: Afirmar que el resultado es verdadero
+        $this->assertTrue($resultado);
     }
-?>
+    
+    public function testLoginConCredencialesInvalidas()
+    {
+        $usuarios_bbdd = [
+            'usuario1@taskflow.com' => [
+                'id' => 1,
+                'nombre' => 'Maxim Masin',
+                'password' => 'pass123'
+            ],
+            'usuario2@taskflow.com' => [
+                'id' => 2,
+                'nombre' => 'Carla Alumna',
+                'password' => 'admin'
+            ]
+        ];
+        
+        $resultado = handleLogin('usuario1@taskflow.com', 'pass_erroneo', $usuarios_bbdd);
+        $this->assertFalse($resultado);
+    }
+}
